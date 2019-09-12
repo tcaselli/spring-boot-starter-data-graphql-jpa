@@ -51,14 +51,14 @@ public class DefaultPersistenceRegistry implements IPersistenceRegistry, Applica
 		for (final IEntityRepository<?> repository : applicationContext
 				.getBeansOfType(IEntityRepository.class, false, false).values()) {
 			final Class<?> repositoryEntityClass = GenericsUtils
-					.getTypeClassArguments(repository.getClass(), IEntityRepository.class).get(0);
+					.getTypeArgumentsAsClasses(repository.getClass(), IEntityRepository.class).get(0);
 			repositories.put(repositoryEntityClass, repository);
 		}
 		// Register queryDSL for each entity
 		final Reflections reflections = new Reflections("com.daikit");
 		final Set<Class<? extends EntityPathBase>> entityPathClasses = reflections.getSubTypesOf(EntityPathBase.class);
 		for (final Class<? extends EntityPathBase> entityPathClass : entityPathClasses) {
-			final Class<?> entityClass = GenericsUtils.getTypeClassArguments(entityPathClass, EntityPathBase.class)
+			final Class<?> entityClass = GenericsUtils.getTypeArgumentsAsClasses(entityPathClass, EntityPathBase.class)
 					.get(0);
 			EntityPathBase<?> entityPath;
 			try {
