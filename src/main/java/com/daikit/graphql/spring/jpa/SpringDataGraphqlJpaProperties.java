@@ -2,11 +2,11 @@ package com.daikit.graphql.spring.jpa;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 /**
- * Spring data GraphQL properties
+ * Spring data GraphQL JPA properties
  *
  * @author Thibaut Caselli
  */
-@ConfigurationProperties(prefix = "spring.data.graphql")
+@ConfigurationProperties(prefix = "spring.data.graphql.jpa")
 public class SpringDataGraphqlJpaProperties {
 
 }
