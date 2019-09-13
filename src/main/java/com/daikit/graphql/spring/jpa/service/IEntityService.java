@@ -22,6 +22,8 @@ public interface IEntityService {
 	 *            the entity class
 	 * @param id
 	 *            the ID
+	 * @param <T>
+	 *            the entity type
 	 * @return an {@link Optional} entity
 	 */
 	<T> Optional<T> findById(Class<T> entityClass, Long id);
@@ -66,9 +68,11 @@ public interface IEntityService {
 	 *            attribute setters
 	 * @param propertyValueMap
 	 *            the map of properties to be set on object
+	 * @param <T>
+	 *            the entity type
 	 * @return the found or created object with properties set
 	 */
-	<T> T findOrCreateAndSetProperties(Class<?> entityClass, GQLDynamicAttributeRegistry dynamicAttributeRegistry,
+	<T> T findOrCreateAndSetProperties(Class<T> entityClass, GQLDynamicAttributeRegistry dynamicAttributeRegistry,
 			Map<String, Object> propertyValueMap);
 
 }

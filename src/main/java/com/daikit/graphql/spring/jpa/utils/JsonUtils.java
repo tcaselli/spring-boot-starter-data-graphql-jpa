@@ -66,6 +66,8 @@ public class JsonUtils {
 	 *            the JSON String
 	 * @param clazz
 	 *            he object class
+	 * @param <T>
+	 *            the returned object type
 	 * @return the converted object
 	 */
 	public static final <T> T fromJson(final String jsonString, final Class<T> clazz) {
@@ -85,6 +87,8 @@ public class JsonUtils {
 	 *            the JSON String
 	 * @param typeReference
 	 *            the type reference
+	 * @param <T>
+	 *            the returned object type
 	 * @return the converted object
 	 */
 	public static final <T> T fromJson(final String jsonString, final TypeReference<T> typeReference) {
@@ -101,6 +105,8 @@ public class JsonUtils {
 	 *
 	 * @param object
 	 *            the object to be copied
+	 * @param <T>
+	 *            the copied object type
 	 * @return the copied object
 	 */
 	@SuppressWarnings("unchecked")

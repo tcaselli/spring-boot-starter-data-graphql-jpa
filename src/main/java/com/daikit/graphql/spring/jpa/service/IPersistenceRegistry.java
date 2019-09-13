@@ -15,15 +15,19 @@ public interface IPersistenceRegistry {
 	 *
 	 * @param entityClass
 	 *            the entity class
+	 * @param <T>
+	 *            the entity type
 	 * @return the entity type
 	 */
 	<T> IEntityRepository<T> getRepository(Class<T> entityClass);
 
 	/**
 	 * Get an APT {@link EntityPathBase} from given entity class
-	 * 
+	 *
 	 * @param entityClass
 	 *            the entity class
+	 * @param <T>
+	 *            the entity type
 	 * @return the {@link EntityPathBase}
 	 */
 	<T> EntityPathBase<T> getEntityPath(Class<T> entityClass);

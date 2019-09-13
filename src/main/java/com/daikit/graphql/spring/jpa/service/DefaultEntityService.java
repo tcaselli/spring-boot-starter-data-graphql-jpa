@@ -47,7 +47,7 @@ import com.querydsl.core.types.dsl.StringPath;
 import com.querydsl.core.types.dsl.TimePath;
 
 /**
- * Implementation of {@link EntityService}
+ * Implementation of {@link IEntityService}
  *
  * @author Thibaut Caselli
  */
@@ -136,7 +136,7 @@ public class DefaultEntityService implements IEntityService {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public <T> T findOrCreateAndSetProperties(Class<?> entityClass,
+	public <T> T findOrCreateAndSetProperties(Class<T> entityClass,
 			GQLDynamicAttributeRegistry dynamicAttributeRegistry, Map<String, Object> propertyValueMap) {
 		// Find or create entity
 		final String id = (String) propertyValueMap.get(GQLSchemaConstants.FIELD_ID);
