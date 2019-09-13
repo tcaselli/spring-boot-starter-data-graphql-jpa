@@ -7,7 +7,7 @@
 Spring boot starter for GraphQL endpoint over a JPA persistence layer based on [java-data-graphql](https://github.com/tcaselli/java-data-graphql) library.  
 See [spring-data-graphql-jpa-demo](https://github.com/tcaselli/spring-data-graphql-jpa-demo) for an example of usage.
 
-The goal of this starter is to make the glue between a GraphQL engine and a SQL database. We have to automatically convert GraphQL queries and mutation to database SQL queries.  
+The goal of this starter is to make the glue between a GraphQL engine and a SQL database. We have to automatically convert GraphQL queries and mutations to database SQL queries.  
 To achieve this goal this starter is using these third party libraries :
 * [JPA + hibernate](https://hibernate.org/) for managing persistence.
 * [spring-data-jpa](https://spring.io/projects/spring-data-jpa) for integration of JPA within a Spring project.
