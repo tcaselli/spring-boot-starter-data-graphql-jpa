@@ -1,4 +1,4 @@
-# Spring boot starter data graphql
+# Spring boot starter data graphql JPA
 
 [![License](http://img.shields.io/:license-apache-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
 
@@ -16,12 +16,12 @@ To achieve this goal this starter is using these third party libraries :
 
 ### QueryDSL entity paths
 
-In order to be able to automatically convert GraphQL queries to JPA queries all entities referenced in GraphQL schema must have a corresponding queryDSL entityPath.  
+In order to be able to automatically convert GraphQL queries to JPA queries, all entities referenced in GraphQL schema must have a corresponding queryDSL entityPath.  
 These entityPaths can be generated thanks to [apt-maven-plugin](https://github.com/querydsl/apt-maven-plugin) (see [demo project](https://github.com/tcaselli/spring-data-graphql-jpa-demo) for example).
 
 ### Spring data JPA repositories
 
-In order to be able to automatically convert GraphQL queries to JPA queries all entities referenced in GraphQL schema must have a corresponding spring data repository interface extending ```com.daikit.graphql.spring.jpa.repository.IEntityRepository``` (see [demo project](https://github.com/tcaselli/spring-data-graphql-jpa-demo) for example).
+In order to be able to automatically convert GraphQL queries to JPA queries, all entities referenced in GraphQL schema must have a corresponding spring data repository interface extending ```com.daikit.graphql.spring.jpa.repository.IEntityRepository``` (see [demo project](https://github.com/tcaselli/spring-data-graphql-jpa-demo) for example).
 
 ### The persistence registry
 
@@ -34,7 +34,7 @@ The entity service (extending ```com.daikit.graphql.spring.jpa.service.IEntitySe
 ### Custom hibernate user types
 
 When you want to store data as JSON in a SQL column you need to use hibernate custom ```org.hibernate.usertype.UserType```. These data can then be available in the GraphQL layer thanks to "embedded entities" (set the entity meta data as embedded when building the GraphQL meta model).  
-In order to simplify the creation/update of these embedded entities you can extend some user types that will simplify your life. (See ```com.daikit.graphql.spring.jpa.usertype.AbstractJsonUserType``` and ```com.daikit.graphql.spring.jpa.usertype.AbstractJsonCollectionUserType``` and extending classes for for info) (see [demo project](https://github.com/tcaselli/spring-data-graphql-jpa-demo) for example)
+In order to simplify the creation/update of these embedded entities you can extend some custom user types that will simplify your life. (See ```com.daikit.graphql.spring.jpa.usertype.AbstractJsonUserType``` and ```com.daikit.graphql.spring.jpa.usertype.AbstractJsonCollectionUserType``` and extending classes for for info) (see [demo project](https://github.com/tcaselli/spring-data-graphql-jpa-demo) for example)
 
 ## Where can I get the latest release?
 
