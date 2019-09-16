@@ -14,7 +14,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.querydsl.QPageRequest;
 
-import com.daikit.graphql.constants.GQLSchemaConstants;
+import com.daikit.graphql.config.GQLSchemaConfig;
 import com.daikit.graphql.data.input.GQLFilterEntry;
 import com.daikit.graphql.data.input.GQLListLoadConfig;
 import com.daikit.graphql.data.output.GQLListLoadResult;
@@ -55,6 +55,8 @@ public class DefaultEntityService implements IEntityService {
 
 	@Autowired
 	private IPersistenceRegistry persistenceRegistry;
+	@Autowired
+	private GQLSchemaConfig schemaConfig;
 
 	// *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
 	// PUBLIC METHODS
@@ -139,7 +141,7 @@ public class DefaultEntityService implements IEntityService {
 	public <T> T findOrCreateAndSetProperties(Class<T> entityClass,
 			GQLDynamicAttributeRegistry dynamicAttributeRegistry, Map<String, Object> propertyValueMap) {
 		// Find or create entity
-		final String id = (String) propertyValueMap.get(GQLSchemaConstants.FIELD_ID);
+		final String id = (String) propertyValueMap.get(schemaConfig.getAttributeIdName());
 
 		Object entity;
 
@@ -161,7 +163,7 @@ public class DefaultEntityService implements IEntityService {
 		for (final Entry<String, Object> entry : propertyValueMap.entrySet()) {
 			final Optional<IGQLDynamicAttributeSetter<Object, Object>> dynamicAttributeSetter = dynamicAttributeRegistry
 					.getSetter(entityClass, entry.getKey());
-			if (!GQLSchemaConstants.FIELD_ID.equals(entry.getKey())) {
+			if (!schemaConfig.getAttributeIdName().equals(entry.getKey())) {
 				Object value = entry.getValue();
 				if (entry.getValue() instanceof Map) {
 					final Class<?> propertyType = FieldUtils.getField(entity.getClass(), entry.getKey(), true)

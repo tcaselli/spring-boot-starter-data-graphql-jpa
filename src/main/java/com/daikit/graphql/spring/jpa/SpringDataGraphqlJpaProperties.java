@@ -6,7 +6,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  *
  * @author Thibaut Caselli
  */
-@ConfigurationProperties(prefix = "spring.data.graphql.jpa")
+@ConfigurationProperties(prefix = "spring.data.graphql.jpa", ignoreUnknownFields = true)
 public class SpringDataGraphqlJpaProperties {
 
 }

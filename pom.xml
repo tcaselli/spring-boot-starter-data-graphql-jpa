@@ -115,8 +115,8 @@
 		<javajdk.version>1.8</javajdk.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<spring-boot.version>2.1.7.RELEASE</spring-boot.version>
-		<spring-boot-starter-data-graphql.version>1.1</spring-boot-starter-data-graphql.version>
 		<reflections.version>0.9.10</reflections.version>
+		<spring-boot-starter-data-graphql.version>1.2</spring-boot-starter-data-graphql.version>
 	</properties>
 	
 	<dependencyManagement>
