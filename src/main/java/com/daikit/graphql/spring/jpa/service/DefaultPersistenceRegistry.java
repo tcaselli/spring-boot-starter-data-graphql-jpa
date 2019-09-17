@@ -39,7 +39,7 @@ public class DefaultPersistenceRegistry implements IPersistenceRegistry, Applica
 	 */
 	@SuppressWarnings("rawtypes")
 	@Override
-	public void onApplicationEvent(ContextRefreshedEvent event) {
+	public void onApplicationEvent(final ContextRefreshedEvent event) {
 		// Register entities
 		for (final EntityManagerFactory entityManagerFactory : applicationContext
 				.getBeansOfType(EntityManagerFactory.class, false, false).values()) {
@@ -86,7 +86,7 @@ public class DefaultPersistenceRegistry implements IPersistenceRegistry, Applica
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public <T> IEntityRepository<T> getRepository(Class<T> entityClass) {
+	public <T> IEntityRepository<T> getRepository(final Class<T> entityClass) {
 		final IEntityRepository<T> repository = (IEntityRepository<T>) repositories.get(entityClass);
 		if (repository == null) {
 			throw new IllegalArgumentException("No repository registered for entity : " + entityClass.getName());
@@ -96,7 +96,7 @@ public class DefaultPersistenceRegistry implements IPersistenceRegistry, Applica
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public <T> EntityPathBase<T> getEntityPath(Class<T> entityClass) {
+	public <T> EntityPathBase<T> getEntityPath(final Class<T> entityClass) {
 		final EntityPathBase<T> entityPath = (EntityPathBase<T>) entityPaths.get(entityClass);
 		if (entityPath == null) {
 			throw new IllegalArgumentException("No APT entity path registered for entity : " + entityClass.getName());

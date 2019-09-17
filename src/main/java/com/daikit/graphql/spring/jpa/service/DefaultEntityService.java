@@ -63,12 +63,12 @@ public class DefaultEntityService implements IEntityService {
 	// *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
 
 	@Override
-	public <T> Optional<T> findById(Class<T> entityClass, Long id) {
+	public <T> Optional<T> findById(final Class<T> entityClass, final Long id) {
 		return persistenceRegistry.getRepository(entityClass).findById(id);
 	}
 
 	@Override
-	public GQLListLoadResult findAll(Class<?> entityClass, GQLListLoadConfig listLoadConfig) {
+	public GQLListLoadResult findAll(final Class<?> entityClass, final GQLListLoadConfig listLoadConfig) {
 		final GQLListLoadResult result = new GQLListLoadResult();
 
 		final IEntityRepository<?> repository = persistenceRegistry.getRepository(entityClass);
@@ -138,8 +138,8 @@ public class DefaultEntityService implements IEntityService {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public <T> T findOrCreateAndSetProperties(Class<T> entityClass,
-			GQLDynamicAttributeRegistry dynamicAttributeRegistry, Map<String, Object> propertyValueMap) {
+	public <T> T findOrCreateAndSetProperties(final Class<T> entityClass,
+			final GQLDynamicAttributeRegistry dynamicAttributeRegistry, final Map<String, Object> propertyValueMap) {
 		// Find or create entity
 		final String id = (String) propertyValueMap.get(schemaConfig.getAttributeIdName());
 
@@ -199,7 +199,7 @@ public class DefaultEntityService implements IEntityService {
 	}
 
 	@SuppressWarnings({"unchecked", "rawtypes"})
-	protected BooleanExpression applyFilter(EntityPathBase<?> basePath, GQLFilterEntry filter)
+	protected BooleanExpression applyFilter(final EntityPathBase<?> basePath, final GQLFilterEntry filter)
 			throws IllegalAccessException {
 		BooleanExpression expression;
 		if (filter.isDynamic()) {
@@ -245,34 +245,34 @@ public class DefaultEntityService implements IEntityService {
 		return expression;
 	}
 
-	protected BooleanExpression applyFilter(DslPath<?> path, GQLFilterOperatorEnum operator, Object value) {
+	protected BooleanExpression applyFilter(final DslPath<?> path, final GQLFilterOperatorEnum operator, final Object value) {
 		throw new IllegalArgumentException("Unhandled path : " + path);
 	}
 
-	protected BooleanExpression applyFilter(MapPath<?, ?, ?> path, GQLFilterOperatorEnum operator, Object value) {
+	protected BooleanExpression applyFilter(final MapPath<?, ?, ?> path, final GQLFilterOperatorEnum operator, final Object value) {
 		throw new IllegalArgumentException("Unhandled path : " + path);
 	}
 
-	protected BooleanExpression applyFilter(CollectionPathBase<?, ?, ?> path, GQLFilterOperatorEnum operator,
-			Object value) {
+	protected BooleanExpression applyFilter(final CollectionPathBase<?, ?, ?> path, final GQLFilterOperatorEnum operator,
+			final Object value) {
 		throw new IllegalArgumentException("Unhandled path : " + path);
 	}
 
-	protected <T> BooleanExpression applyFilter(ArrayPath<T, ?> path, GQLFilterOperatorEnum operator, Object value) {
+	protected <T> BooleanExpression applyFilter(final ArrayPath<T, ?> path, final GQLFilterOperatorEnum operator, final Object value) {
 		return applyFilter((SimpleExpression<T>) path, operator, value);
 	}
 
-	protected <T> BooleanExpression applyFilter(EntityPathBase<T> path, GQLFilterOperatorEnum operator, Object value) {
+	protected <T> BooleanExpression applyFilter(final EntityPathBase<T> path, final GQLFilterOperatorEnum operator, final Object value) {
 		return applyFilter((SimpleExpression<T>) path, operator, value);
 	}
 
-	protected <T> BooleanExpression applyFilter(SimplePath<T> path, GQLFilterOperatorEnum operator, Object value) {
+	protected <T> BooleanExpression applyFilter(final SimplePath<T> path, final GQLFilterOperatorEnum operator, final Object value) {
 		return applyFilter((SimpleExpression<T>) path, operator, value);
 	}
 
 	@SuppressWarnings("unchecked")
-	protected <T> BooleanExpression applyFilter(SimpleExpression<T> path, GQLFilterOperatorEnum operator,
-			Object value) {
+	protected <T> BooleanExpression applyFilter(final SimpleExpression<T> path, final GQLFilterOperatorEnum operator,
+			final Object value) {
 		BooleanExpression expression;
 		switch (operator) {
 			case NULL :
@@ -299,29 +299,29 @@ public class DefaultEntityService implements IEntityService {
 		return expression;
 	}
 
-	protected <T extends Comparable<T>> BooleanExpression applyFilter(ComparablePath<T> path,
-			GQLFilterOperatorEnum operator, Object value) {
+	protected <T extends Comparable<T>> BooleanExpression applyFilter(final ComparablePath<T> path,
+			final GQLFilterOperatorEnum operator, final Object value) {
 		return applyFilter((ComparableExpression<T>) path, operator, value);
 	}
 
-	protected <T extends Comparable<T>> BooleanExpression applyFilter(DatePath<T> path, GQLFilterOperatorEnum operator,
-			Object value) {
+	protected <T extends Comparable<T>> BooleanExpression applyFilter(final DatePath<T> path, final GQLFilterOperatorEnum operator,
+			final Object value) {
 		return applyFilter((ComparableExpression<T>) path, operator, value);
 	}
 
-	protected <T extends Comparable<T>> BooleanExpression applyFilter(DateTimePath<T> path,
-			GQLFilterOperatorEnum operator, Object value) {
+	protected <T extends Comparable<T>> BooleanExpression applyFilter(final DateTimePath<T> path,
+			final GQLFilterOperatorEnum operator, final Object value) {
 		return applyFilter((ComparableExpression<T>) path, operator, value);
 	}
 
-	protected <T extends Comparable<T>> BooleanExpression applyFilter(TimePath<T> path, GQLFilterOperatorEnum operator,
-			Object value) {
+	protected <T extends Comparable<T>> BooleanExpression applyFilter(final TimePath<T> path, final GQLFilterOperatorEnum operator,
+			final Object value) {
 		return applyFilter((ComparableExpression<T>) path, operator, value);
 	}
 
 	@SuppressWarnings("unchecked")
-	protected <T extends Comparable<T>> BooleanExpression applyFilter(ComparableExpression<T> path,
-			GQLFilterOperatorEnum operator, Object value) {
+	protected <T extends Comparable<T>> BooleanExpression applyFilter(final ComparableExpression<T> path,
+			final GQLFilterOperatorEnum operator, final Object value) {
 		BooleanExpression expression;
 		switch (operator) {
 			case NULL :
@@ -361,7 +361,7 @@ public class DefaultEntityService implements IEntityService {
 	}
 
 	@SuppressWarnings("unchecked")
-	protected BooleanExpression applyFilter(BooleanPath path, GQLFilterOperatorEnum operator, Object value) {
+	protected BooleanExpression applyFilter(final BooleanPath path, final GQLFilterOperatorEnum operator, final Object value) {
 		BooleanExpression expression;
 		switch (operator) {
 			case NULL :
@@ -389,8 +389,8 @@ public class DefaultEntityService implements IEntityService {
 	}
 
 	@SuppressWarnings("unchecked")
-	protected <T extends Enum<T>> BooleanExpression applyFilter(EnumPath<T> path, GQLFilterOperatorEnum operator,
-			Object value) {
+	protected <T extends Enum<T>> BooleanExpression applyFilter(final EnumPath<T> path, final GQLFilterOperatorEnum operator,
+			final Object value) {
 		BooleanExpression expression;
 		switch (operator) {
 			case NULL :
@@ -418,8 +418,8 @@ public class DefaultEntityService implements IEntityService {
 	}
 
 	@SuppressWarnings("unchecked")
-	protected <T extends Number & Comparable<T>> BooleanExpression applyFilter(NumberPath<T> path,
-			GQLFilterOperatorEnum operator, Object value) {
+	protected <T extends Number & Comparable<T>> BooleanExpression applyFilter(final NumberPath<T> path,
+			final GQLFilterOperatorEnum operator, final Object value) {
 		BooleanExpression expression;
 		switch (operator) {
 			case NULL :
@@ -459,7 +459,7 @@ public class DefaultEntityService implements IEntityService {
 	}
 
 	@SuppressWarnings("unchecked")
-	protected BooleanExpression applyFilter(StringPath path, GQLFilterOperatorEnum operator, Object value) {
+	protected BooleanExpression applyFilter(final StringPath path, final GQLFilterOperatorEnum operator, final Object value) {
 		BooleanExpression expression;
 		switch (operator) {
 			case EMPTY :
