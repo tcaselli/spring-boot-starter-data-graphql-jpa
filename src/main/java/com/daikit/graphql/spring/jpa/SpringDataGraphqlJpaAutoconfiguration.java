@@ -1,5 +1,6 @@
 package com.daikit.graphql.spring.jpa;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -19,6 +20,13 @@ import com.daikit.graphql.spring.jpa.service.IPersistenceRegistry;
 @EnableConfigurationProperties(SpringDataGraphqlJpaProperties.class)
 public class SpringDataGraphqlJpaAutoconfiguration {
 
+	@Autowired
+	private SpringDataGraphqlJpaProperties properties;
+
+	// *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
+	// PUBLIC METHODS
+	// *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
+
 	/**
 	 * Create the persistence registry
 	 *
@@ -27,7 +35,7 @@ public class SpringDataGraphqlJpaAutoconfiguration {
 	@Bean
 	@ConditionalOnMissingBean
 	public IPersistenceRegistry createPersistenceRegistry() {
-		return new DefaultPersistenceRegistry();
+		return new DefaultPersistenceRegistry(properties.getQuerydslParentPackages());
 	}
 
 	/**

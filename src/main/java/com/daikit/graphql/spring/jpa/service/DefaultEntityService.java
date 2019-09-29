@@ -23,7 +23,6 @@ import com.daikit.graphql.datafetcher.GQLDynamicAttributeRegistry;
 import com.daikit.graphql.dynamicattribute.IGQLDynamicAttributeSetter;
 import com.daikit.graphql.enums.GQLFilterOperatorEnum;
 import com.daikit.graphql.enums.GQLOrderByDirectionEnum;
-import com.daikit.graphql.spring.jpa.repository.IEntityRepository;
 import com.querydsl.core.types.Order;
 import com.querydsl.core.types.OrderSpecifier;
 import com.querydsl.core.types.Path;
@@ -70,8 +69,6 @@ public class DefaultEntityService implements IEntityService {
 	@Override
 	public GQLListLoadResult findAll(final Class<?> entityClass, final GQLListLoadConfig listLoadConfig) {
 		final GQLListLoadResult result = new GQLListLoadResult();
-
-		final IEntityRepository<?> repository = persistenceRegistry.getRepository(entityClass);
 		final EntityPathBase<?> basePath = persistenceRegistry.getEntityPath(entityClass);
 
 		// Apply filtering
@@ -108,7 +105,7 @@ public class DefaultEntityService implements IEntityService {
 		if (listLoadConfig.isPaged()) {
 			final int page = listLoadConfig.getOffset() % listLoadConfig.getLimit();
 			final Pageable pageable = new QPageRequest(page, listLoadConfig.getLimit(), orderSpecifiers);
-			final Page<?> resultPage = repository.findAll(predicate, pageable);
+			final Page<?> resultPage = persistenceRegistry.getRepository(entityClass).findAll(predicate, pageable);
 			result.setData(resultPage.getContent());
 			result.setPaging(listLoadConfig.getLimit(), listLoadConfig.getOffset(),
 					Long.valueOf(resultPage.getTotalElements()).intValue());
@@ -117,7 +114,7 @@ public class DefaultEntityService implements IEntityService {
 		// Else if no paging then return all data
 		else {
 			final List<Object> data = new ArrayList<>();
-			repository.findAll(predicate, orderSpecifiers).forEach(data::add);
+			persistenceRegistry.getRepository(entityClass).findAll(predicate, orderSpecifiers).forEach(data::add);
 			result.setData(data);
 			result.setOrderBy(listLoadConfig.getOrderBy());
 		}

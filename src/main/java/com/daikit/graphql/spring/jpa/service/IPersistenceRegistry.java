@@ -1,6 +1,8 @@
 package com.daikit.graphql.spring.jpa.service;
 
-import com.daikit.graphql.spring.jpa.repository.IEntityRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.querydsl.QuerydslPredicateExecutor;
+
 import com.querydsl.core.types.dsl.EntityPathBase;
 
 /**
@@ -15,11 +17,16 @@ public interface IPersistenceRegistry {
 	 *
 	 * @param entityClass
 	 *            the entity class
-	 * @param <T>
+	 * @param <ENTITY_TYPE>
 	 *            the entity type
+	 * @param <ID_TYPE>
+	 *            the id type
+	 * @param <RETURN_TYPE>
+	 *            the return type
 	 * @return the entity type
 	 */
-	<T> IEntityRepository<T> getRepository(Class<T> entityClass);
+	<ENTITY_TYPE, ID_TYPE, RETURN_TYPE extends JpaRepository<ENTITY_TYPE, ID_TYPE> & QuerydslPredicateExecutor<ENTITY_TYPE>> RETURN_TYPE getRepository(
+			Class<ENTITY_TYPE> entityClass);
 
 	/**
 	 * Get an APT {@link EntityPathBase} from given entity class
