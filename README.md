@@ -14,6 +14,15 @@ To achieve this goal this starter is using these third party libraries :
 * [querydsl](http://www.querydsl.com/) for JPA queries generation.
 * [java-data-graphql](https://github.com/tcaselli/java-data-graphql) for the GraphQL layer.
 
+### Configuration properties
+
+When creating a GQLExecutor, you will have to provide a ```com.daikit.graphql.config.GQLSchemaConfig```. The default implementation takes these properties default values. You can override these properties in your ```application.properties``` file.
+
+```properties
+# the base package where your querydsl entity paths will be generated
+spring.data.graphql.jpa.querydsl-parent-packages=com.daikit
+```
+
 ### QueryDSL entity paths
 
 In order to be able to automatically convert GraphQL queries to JPA queries, all entities referenced in GraphQL schema must have a corresponding queryDSL entityPath.  
