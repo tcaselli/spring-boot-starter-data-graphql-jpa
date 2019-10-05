@@ -1,6 +1,7 @@
 package com.daikit.graphql.spring.jpa;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
+
 /**
  * Spring data GraphQL JPA properties
  *
@@ -26,7 +27,7 @@ public class SpringDataGraphqlJpaProperties {
 	 * @param querydslParentPackages
 	 *            the querydslParentPackages to set
 	 */
-	public void setQuerydslParentPackages(String querydslParentPackages) {
+	public void setQuerydslParentPackages(final String querydslParentPackages) {
 		this.querydslParentPackages = querydslParentPackages;
 	}
 

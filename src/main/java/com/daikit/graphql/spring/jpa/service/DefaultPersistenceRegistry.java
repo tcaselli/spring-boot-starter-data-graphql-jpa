@@ -51,10 +51,8 @@ public class DefaultPersistenceRegistry implements IPersistenceRegistry, Applica
 	 *            a collection of query DSL entity path base packages (where apt
 	 *            plugin generates querydsl entity paths)
 	 */
-	public DefaultPersistenceRegistry(String... queryDslParentPackages) {
-		Assert.assertTrue(queryDslParentPackages.length > 0,
-				"There should be at least one query DSL entity path base package");
-		this.queryDslParentPackages = Arrays.asList(queryDslParentPackages);
+	public DefaultPersistenceRegistry(final String... queryDslParentPackages) {
+		this(Arrays.asList(queryDslParentPackages));
 	}
 
 	/**
@@ -64,7 +62,11 @@ public class DefaultPersistenceRegistry implements IPersistenceRegistry, Applica
 	 *            a collection of query DSL entity path base packages (where apt
 	 *            plugin generates querydsl entity paths)
 	 */
-	public DefaultPersistenceRegistry(Collection<String> queryDslParentPackages) {
+	public DefaultPersistenceRegistry(final Collection<String> queryDslParentPackages) {
+		Assert.assertTrue(
+				queryDslParentPackages.size() > 0
+						&& !(queryDslParentPackages.size() == 1 && queryDslParentPackages.iterator().next() == null),
+				"There should be at least one query DSL entity path base package");
 		this.queryDslParentPackages = queryDslParentPackages;
 	}
 
@@ -131,7 +133,7 @@ public class DefaultPersistenceRegistry implements IPersistenceRegistry, Applica
 	@SuppressWarnings("unchecked")
 	@Override
 	public <ENTITY_TYPE, ID_TYPE, RETURN_TYPE extends JpaRepository<ENTITY_TYPE, ID_TYPE> & QuerydslPredicateExecutor<ENTITY_TYPE>> RETURN_TYPE getRepository(
-			Class<ENTITY_TYPE> entityClass) {
+			final Class<ENTITY_TYPE> entityClass) {
 		final Object repository = repositories.get(entityClass);
 		if (repository == null) {
 			throw new IllegalArgumentException("No repository registered for entity : " + entityClass.getName());
